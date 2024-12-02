@@ -56,13 +56,13 @@ cd /var/www/html/wordpress
 
 # 添加 Redis 配置到 wp-config.php
 echo "添加 Redis 配置到 wp-config.php..."
-cat <<EOL >> /var/www/html/wordpress/wp-config.php
+# cat <<EOL >> /var/www/html/wordpress/wp-config.php
 
-define('WP_REDIS_HOST', '127.0.0.1'); // Redis 主机
-define('WP_REDIS_PORT', 6379);        // Redis 端口
-define('WP_REDIS_PASSWORD', 'yourpassword'); // 如果有密码
-define('WP_REDIS_DATABASE', 0);      // Redis 数据库编号
-EOL
+# define('WP_REDIS_HOST', '127.0.0.1'); // Redis 主机
+# define('WP_REDIS_PORT', 6379);        // Redis 端口
+# define('WP_REDIS_PASSWORD', 'yourpassword'); // 如果有密码
+# define('WP_REDIS_DATABASE', 0);      // Redis 数据库编号
+# EOL
 
 
 # 配置 Nginx
