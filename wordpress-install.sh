@@ -52,10 +52,7 @@ chmod -R 755 /var/www/html/wordpress
 # 配置 WordPress
 echo "配置 WordPress..."
 cd /var/www/html/wordpress
-cp wp-config-sample.php wp-config.php
-sed -i "s/database_name_here/wordpress/" wp-config.php
-sed -i "s/username_here/wpuser/" wp-config.php
-sed -i "s/password_here/yourpassword/" wp-config.php
+
 
 # 配置 Nginx
 echo "配置 Nginx..."
