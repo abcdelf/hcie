@@ -54,11 +54,38 @@ chmod -R 755 /var/www/html/wordpress
 echo "配置 WordPress..."
 cd /var/www/html/wordpress
 
-# 添加 Redis 配置到 wp-config.php
-# cat <<EOL >> /var/www/html/wordpress/wp-config.php
+# 获取外部 MySQL 数据库信息
+read -p "请输入外部 MySQL 数据库地址: " DB_HOST
+read -p "请输入外部 MySQL 数据库端口（默认 3306）: " DB_PORT
+DB_PORT=${DB_PORT:-3306}
+read -p "请输入外部 MySQL 数据库用户名: " DB_USER
+read -s -p "请输入外部 MySQL 数据库密码: " DB_PASSWORD
+echo
+read -p "请输入 WordPress 数据库名称: " DB_NAME
+
+# 配置 WordPress
+echo "配置 WordPress..."
+cd /var/www/html/wordpress
+cp wp-config-sample.php wp-config.php
+sed -i "s/database_name_here/$DB_NAME/" wp-config.php
+sed -i "s/username_here/$DB_USER/" wp-config.php
+sed -i "s/password_here/$DB_PASSWORD/" wp-config.php
+sed -i "/DB_HOST/c\define('DB_HOST', '$DB_HOST:$DB_PORT');" wp-config.php
+
+# 添加 Redis 配置到 wp-config.php 中的正确位置
 echo "添加 Redis 配置到 wp-config.php..."
-sed -i "/^\?>/i \
-define('WP_REDIS_HOST', '127.0.0.1'); // Redis 主机\ndefine('WP_REDIS_PORT', 6379);        // Redis 端口\ndefine('WP_REDIS_PASSWORD', 'yourpassword'); // 如果有密码\ndefine('WP_REDIS_DATABASE', 0);      // Redis 数据库编号" /var/www/html/wordpress/wp-config.php
+read -p "请输入外部 Redis 数据库地址: " REDIS_HOST
+read -p "请输入外部 Redis 数据库端口（默认 6379）: " REDIS_PORT
+REDIS_PORT=${REDIS_PORT:-6379}
+read -s -p "请输入外部 Redis 数据库密码（如无密码留空）: " REDIS_PASSWORD
+echo
+read -p "请输入外部 Redis 数据库编号（默认 0）: " REDIS_DATABASE
+REDIS_DATABASE=${REDIS_DATABASE:-0}
+
+sed -i "/\\/\\* That's all, stop editing! Happy publishing. \\*\\//i \
+define('WP_REDIS_HOST', '$REDIS_HOST');\ndefine('WP_REDIS_PORT', $REDIS_PORT);\ndefine('WP_REDIS_PASSWORD', '$REDIS_PASSWORD');\ndefine('WP_REDIS_DATABASE', $REDIS_DATABASE);" wp-config.php
+
+
 
 # define('WP_REDIS_HOST', '127.0.0.1'); // Redis 主机
 # define('WP_REDIS_PORT', 6379);        // Redis 端口
