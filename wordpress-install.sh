@@ -132,4 +132,10 @@ firewall-cmd --permanent --add-service=http
 firewall-cmd --permanent --add-service=https
 firewall-cmd --reload
 
+# 安装 obs 插件
+echo "安装 obs 插件..."
+cd /var/www/html/wordpress/wp-content/plugins/
+wget https://obs-community.obs.cn-north-1.myhuaweicloud.com/wordpress/hwcloud-obs.zip
+unzip hwcloud-obs.zip
+
 echo "WordPress 安装完成！请在浏览器中访问 http://$(curl -s http://checkip.amazonaws.com) 完成安装配置。"
