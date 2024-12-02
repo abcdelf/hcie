@@ -27,14 +27,14 @@ echo "配置 PHP-FPM..."
 sed -i 's/^user = apache/user = nginx/' /etc/php-fpm.d/www.conf
 sed -i 's/^group = apache/group = nginx/' /etc/php-fpm.d/www.conf
 sed -i 's/^listen = 127.0.0.1:9000/listen = \/run\/php-fpm\/www.sock/' /etc/php-fpm.d/www.conf
+sed -i 's/^;listen.owner = nobody/listen.owner = nginx/' /etc/php-fpm.d/www.conf
+sed -i 's/^;listen.group = nobody/listen.group = nginx/' /etc/php-fpm.d/www.conf
 
-# 确保 PHP-FPM Socket 权限
+# 启动 PHP-FPM 并确保 Socket 权限
 echo "调整 PHP-FPM Socket 权限..."
-mkdir -p /run/php-fpm
+systemctl start php-fpm
 chown nginx:nginx /run/php-fpm/www.sock
 chmod 660 /run/php-fpm/www.sock
-
-systemctl start php-fpm
 systemctl enable php-fpm
 
 
