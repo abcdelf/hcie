@@ -132,4 +132,4 @@ firewall-cmd --permanent --add-service=http
 firewall-cmd --permanent --add-service=https
 firewall-cmd --reload
 
-echo "WordPress 安装完成！请在浏览器中访问 http://your_server_ip 完成安装配置。"
+echo "WordPress 安装完成！请在浏览器中访问 http://$(curl -s http://checkip.amazonaws.com) 完成安装配置。"
