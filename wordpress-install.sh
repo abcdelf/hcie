@@ -1,4 +1,4 @@
-#!/bin/bash
+# #!/bin/bash
 
 # 更新系统
 echo "更新系统..."
