@@ -19,7 +19,8 @@ yum-config-manager --enable remi-php74
 
 # 安装 PHP 7.4 和扩展
 echo "安装 PHP 7.4 和常用扩展..."
-yum install -y php php-fpm php-mysqlnd php-gd php-mbstring php-xml php-xmlrpc php-opcache php-cli
+yum install -y php php-fpm php-mysqlnd php-gd php-mbstring php-xml php-xmlrpc php-opcache php-cli php-redis
+
 
 # 配置 PHP-FPM
 echo "配置 PHP-FPM..."
