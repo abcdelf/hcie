@@ -135,7 +135,7 @@ firewall-cmd --reload
 # 安装 obs 插件
 echo "安装 obs 插件..."
 cd /var/www/html/wordpress/wp-content/plugins/
-wget https://github.com/sy-records/huaweicloud-obs-wordpress/releases/download/v1.3.0/huaweicloud-obs-wordpress.zip
+wget https://github.com/sy-records/huaweicloud-obs-wordpress/releases/download/v1.4.0/huaweicloud-obs-wordpress.zip
 unzip huaweicloud-obs-wordpress.zip
 
 echo "WordPress 安装完成！请在浏览器中访问 http://$(curl -s http://checkip.amazonaws.com) 完成安装配置。"
